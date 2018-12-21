@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  nodejs_webserver:
+    image: nodejs_webserver
+    command: nodemon server/server
+    volumes:
+      - ./:/app
+    ports:
+      - 3000:3000
+    links:
+      - mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+        - data-volume:/data/db
+        - mongodb_config:/data/configdb
+volumes:
+  data-volume:
+  mongodb_config:
